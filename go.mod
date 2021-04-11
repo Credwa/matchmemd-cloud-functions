@@ -1,4 +1,4 @@
-module github.com/credwa/matchmemd-cloud-functions
+module matchmemd-cloud-functions
 
 go 1.16
 

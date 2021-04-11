@@ -5,10 +5,11 @@ import (
 	"log"
 	"os"
 
-	matchmemdpasswordreset "matchmemd-password-reset"
+	matchmemdpasswordreset "matchmemd-cloud-functions/matchmemd-password-reset"
+
+	"matchmemd-cloud-functions/common"
 
 	"github.com/GoogleCloudPlatform/functions-framework-go/funcframework"
-	"matchmemd.com/functions/common"
 )
 
 func main() {
