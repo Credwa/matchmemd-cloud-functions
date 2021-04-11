@@ -1,4 +1,4 @@
-module matchmemd.com/functions/matchmemd-password-reset
+module matchmemd-password-reset
 
 go 1.16
 

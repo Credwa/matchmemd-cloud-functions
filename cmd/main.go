@@ -5,6 +5,8 @@ import (
 	"log"
 	"os"
 
+	matchmemdpasswordreset "matchmemd-password-reset"
+
 	"github.com/GoogleCloudPlatform/functions-framework-go/funcframework"
 	"matchmemd.com/functions/common"
 )
@@ -16,7 +18,7 @@ func main() {
 		log.Fatalf("funcframework.RegisterHTTPFunctionContext: %v\n", err)
 	}
 
-	if err := funcframework.RegisterHTTPFunctionContext(ctx, "/password-reset-request", nil); err != nil {
+	if err := funcframework.RegisterHTTPFunctionContext(ctx, "/password-reset-request", matchmemdpasswordreset.PasswordResetRequest); err != nil {
 		log.Fatalf("funcframework.RegisterHTTPFunctionContext: %v\n", err)
 	}
 	port := "8765"
