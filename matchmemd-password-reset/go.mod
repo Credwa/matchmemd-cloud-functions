@@ -1,4 +1,4 @@
-module matchmemd-password-reset
+module github.com/credwa/matchmemd-cloud-functions/matchmemd-password-reset
 
 go 1.16
 
