@@ -1,0 +1,10 @@
+GET http://localhost:8765 HTTP/1.1
+content-type: application/json
+
+###
+
+GET http://localhost:8765/password-reset-request HTTP/1.1
+content-type: application/json
+
+###
+GET https://us-east1-matchmemd-staging-308907.cloudfunctions.net/password-reset-request HTTP/1.1
