@@ -22,7 +22,7 @@ import (
 // }
 
 func PasswordResetRequest(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Hello World!\n")
+	fmt.Fprint(w, "Hello Beautiful World!\n")
 	from := mail.NewEmail("Example User", "admin@matchmemd.com")
 	subject := "Sending with SendGrid is Fun"
 	to := mail.NewEmail("Example User", "craigroe7@gmail.com")
