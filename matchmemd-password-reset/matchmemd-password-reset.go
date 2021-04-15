@@ -149,7 +149,6 @@ func dynamicTemplateEmail(pData *PasswordResetData) []byte {
 
 func PasswordResetRequest(w http.ResponseWriter, r *http.Request) {
 	var p PasswordResetData
-	CORSEnabledFunction(w, r)
 
 	if r.Method == http.MethodOptions {
 		w.Header().Set("Access-Control-Allow-Origin", "*")
@@ -161,6 +160,9 @@ func PasswordResetRequest(w http.ResponseWriter, r *http.Request) {
 	}
 	// Set CORS headers for the main request.
 	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "POST")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+	w.Header().Set("Access-Control-Max-Age", "3600")
 
 	err := decodeJSONBody(w, r, &p)
 	if err != nil {
