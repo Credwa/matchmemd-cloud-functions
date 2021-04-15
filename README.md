@@ -10,7 +10,11 @@ cp .env.example .env && cp matchmemd-staging-credentials.example.json matchmemd-
 Replace the variable values
 
 ```
-source .env
+source /workspaces/matchmemd-cloud-functions/.env
+```
+
+```
+export GOOGLE_APPLICATION_CREDENTIALS="/workspaces/matchmemd-cloud-functions/matchmemd-staging-credentials.json"
 ```
 
 ### Install dependencies:
@@ -22,5 +26,11 @@ go install
 Run development server:
 
 ```
-go run cmd/main.go
+make dev
+```
+
+### Enabling unauthenticated access to cloud function after deployment
+
+```
+gcloud functions add-iam-policy-binding --member=allUsers --role=roles/cloudfunctions.invoker <FUNCTION-NAME> --region=<REGION>
 ```
