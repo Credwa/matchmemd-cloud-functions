@@ -51,11 +51,6 @@ func decodeJSONBody(w http.ResponseWriter, r *http.Request, dst interface{}) err
 		return nil
 	}
 
-	if r.Method != http.MethodPost {
-		http.Error(w, "405 - Method not allowed", http.StatusMethodNotAllowed)
-		return nil
-	}
-
 	r.Body = http.MaxBytesReader(w, r.Body, 1048576)
 	dec := json.NewDecoder(r.Body)
 	dec.DisallowUnknownFields()
@@ -154,9 +149,10 @@ func dynamicTemplateEmail(pData *PasswordResetData) []byte {
 
 func PasswordResetRequest(w http.ResponseWriter, r *http.Request) {
 	var p PasswordResetData
-	if r.Method == http.MethodOptions {
-		CORSEnabledFunction(w, r)
-		http.StatusText(http.StatusOK)
+	CORSEnabledFunction(w, r)
+
+	if r.Method != http.MethodPost {
+		http.Error(w, "405 - Method not allowed", http.StatusMethodNotAllowed)
 		return
 	}
 
