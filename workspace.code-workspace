@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "./matchmemd-password-reset"
+		},
+		{
+			"path": "./matchmemd-verify-email"
+		}
+	],
+	"settings": {}
+}

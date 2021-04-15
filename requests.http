@@ -7,7 +7,7 @@ POST http://localhost:8765/password-reset-request HTTP/1.1
 content-type: application/json
 
 {
-  "email": "edwards.r.craig@gmail.com",
+  "email": "edwards.r.craffig@gmail.com",
   "host": "https://staging.matchmemd.com"
 }
 

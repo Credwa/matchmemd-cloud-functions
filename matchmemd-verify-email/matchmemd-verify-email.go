@@ -1,4 +1,4 @@
-package matchmemdpasswordreset
+package matchmemdverifyemail
 
 import (
 	"context"
@@ -138,7 +138,7 @@ func dynamicTemplateEmail(pData *PasswordResetData) []byte {
 	e := mail.NewEmail(noReplyEmailFrom, noReplyEmailFrom)
 	m.SetFrom(e)
 
-	m.SetTemplateID("d-af21306d33bd4af58ab3bb3ff7536902")
+	m.SetTemplateID("d-a284536d6aaa4b9a96b8943bfdc1f955")
 	p := mail.NewPersonalization()
 	tos := []*mail.Email{
 		mail.NewEmail("", pData.Email),
@@ -147,12 +147,12 @@ func dynamicTemplateEmail(pData *PasswordResetData) []byte {
 	p.AddTos(tos...)
 
 	p.SetDynamicTemplateData("email", pData.Email)
-	p.SetDynamicTemplateData("passwordResetURL", link)
+	p.SetDynamicTemplateData("verifyEmailURL", link)
 	m.AddPersonalizations(p)
 	return mail.GetRequestBody(m)
 }
 
-func PasswordResetRequest(w http.ResponseWriter, r *http.Request) {
+func VerifyEmailRequest(w http.ResponseWriter, r *http.Request) {
 	var p PasswordResetData
 	CORSEnabledFunction(w, r)
 	err := decodeJSONBody(w, r, &p)
