@@ -151,10 +151,10 @@ func PasswordResetRequest(w http.ResponseWriter, r *http.Request) {
 	var p PasswordResetData
 	CORSEnabledFunction(w, r)
 
-	if r.Method != http.MethodPost {
-		http.Error(w, "405 - Method not allowed", http.StatusMethodNotAllowed)
-		return
-	}
+	// if r.Method != http.MethodPost {
+	// 	http.Error(w, "405 - Method not allowed", http.StatusMethodNotAllowed)
+	// 	return
+	// }
 
 	err := decodeJSONBody(w, r, &p)
 	if err != nil {
