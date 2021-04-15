@@ -31,22 +31,18 @@ func (mr *malformedRequest) Error() string {
 	return mr.msg
 }
 
-func CORSEnabledFunction(w *http.ResponseWriter, r *http.Request) {
-	// // Set CORS headers for the preflight request
-	// if r.Method == http.MethodOptions {
-	// 	w.Header().Set("Access-Control-Allow-Origin", "*")
-	// 	w.Header().Set("Access-Control-Allow-Methods", "POST")
-	// 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
-	// 	w.Header().Set("Access-Control-Max-Age", "3600")
-	// 	w.WriteHeader(http.StatusNoContent)
-	// 	return
-	// }
-	// // Set CORS headers for the main request.
-	// w.Header().Set("Access-Control-Allow-Origin", "*")
-
-	(*w).Header().Set("Access-Control-Allow-Origin", "*")
-	(*w).Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
-	(*w).Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
+func CORSEnabledFunction(w http.ResponseWriter, r *http.Request) {
+	// Set CORS headers for the preflight request
+	if r.Method == http.MethodOptions {
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Methods", "POST")
+		w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+		w.Header().Set("Access-Control-Max-Age", "3600")
+		w.WriteHeader(http.StatusNoContent)
+		return
+	}
+	// Set CORS headers for the main request.
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 }
 
 func decodeJSONBody(w http.ResponseWriter, r *http.Request, dst interface{}) error {
@@ -158,7 +154,7 @@ func dynamicTemplateEmail(pData *PasswordResetData) []byte {
 
 func PasswordResetRequest(w http.ResponseWriter, r *http.Request) {
 	var p PasswordResetData
-	CORSEnabledFunction(&w, r)
+	CORSEnabledFunction(w, r)
 	err := decodeJSONBody(w, r, &p)
 	if err != nil {
 		var mr *malformedRequest
