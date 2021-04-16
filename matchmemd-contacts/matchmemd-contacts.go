@@ -1,7 +1,6 @@
 package matchmemdcontacts
 
 import (
-	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -10,8 +9,8 @@ import (
 	"net/http"
 	"os"
 	"strings"
+
 	"github.com/sendgrid/sendgrid-go"
-	"github.com/sendgrid/sendgrid-go/helpers/mail"
 )
 
 type ContactData struct {
@@ -77,7 +76,7 @@ func decodeJSONBody(w http.ResponseWriter, r *http.Request, dst interface{}) err
 	return nil
 }
 
-func dynamicTemplateEmail(pData *PasswordResetData) []byte {
+func dynamicTemplateEmail(pData *ContactData) []byte {
 	// m := mail.NewV3Mail()
 
 	// const noReplyEmailFrom = "no-reply@matchmemd.com"
@@ -100,7 +99,7 @@ func dynamicTemplateEmail(pData *PasswordResetData) []byte {
 }
 
 func ContactRequest(w http.ResponseWriter, r *http.Request) {
-	var p PasswordResetData
+	var p ContactData
 
 	// Set CORS headers for the preflight request
 	if r.Method == http.MethodOptions {
