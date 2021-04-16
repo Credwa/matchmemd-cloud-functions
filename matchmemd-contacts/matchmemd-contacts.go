@@ -1,4 +1,4 @@
-package matchmemdverifyemail
+package matchmemdcontacts
 
 import (
 	"context"
@@ -10,17 +10,13 @@ import (
 	"net/http"
 	"os"
 	"strings"
-
-	firebase "firebase.google.com/go"
-	"firebase.google.com/go/auth"
 	"github.com/sendgrid/sendgrid-go"
 	"github.com/sendgrid/sendgrid-go/helpers/mail"
 )
 
-type VerifyEmailData struct {
-	Email     string `json:"email"`
-	FirstName string `json:"first_name"`
-	Host      string `json:"host"`
+type ContactData struct {
+	Email string `json:"email"`
+	Host  string `json:"host"`
 }
 
 type malformedRequest struct {
@@ -81,56 +77,30 @@ func decodeJSONBody(w http.ResponseWriter, r *http.Request, dst interface{}) err
 	return nil
 }
 
-func generatePasswordResetLink(p *VerifyEmailData) string {
-	app, err := firebase.NewApp(context.Background(), nil)
-	if err != nil {
-		log.Fatalf("error initializing app: %v\n", err)
-	}
+func dynamicTemplateEmail(pData *PasswordResetData) []byte {
+	// m := mail.NewV3Mail()
 
-	// Access auth service from the default app
-	client, err := app.Auth(context.Background())
-	if err != nil {
-		log.Fatalf("error getting Auth client: %v\n", err)
-	}
+	// const noReplyEmailFrom = "no-reply@matchmemd.com"
 
-	actionCodeSettings := &auth.ActionCodeSettings{
-		URL: p.Host + "/login",
-	}
+	// e := mail.NewEmail(noReplyEmailFrom, noReplyEmailFrom)
+	// m.SetFrom(e)
 
-	link, err := client.EmailVerificationLinkWithSettings(context.Background(), p.Email, actionCodeSettings)
-	if err != nil {
-		log.Fatalf("error generating email link: %v\n", err)
-	}
+	// m.SetTemplateID("d-af21306d33bd4af58ab3bb3ff7536902")
+	// p := mail.NewPersonalization()
+	// tos := []*mail.Email{
+	// 	mail.NewEmail("", pData.Email),
+	// }
 
-	return link
+	// p.AddTos(tos...)
+
+	// p.SetDynamicTemplateData("email", pData.Email)
+	// p.SetDynamicTemplateData("passwordResetURL", link)
+	// m.AddPersonalizations(p)
+	// return mail.GetRequestBody(m)
 }
 
-func dynamicTemplateEmail(pData *VerifyEmailData) []byte {
-	m := mail.NewV3Mail()
-	link := generatePasswordResetLink(pData)
-
-	const noReplyEmailFrom = "no-reply@matchmemd.com"
-
-	e := mail.NewEmail(noReplyEmailFrom, noReplyEmailFrom)
-	m.SetFrom(e)
-
-	m.SetTemplateID("d-a284536d6aaa4b9a96b8943bfdc1f955")
-	p := mail.NewPersonalization()
-	tos := []*mail.Email{
-		mail.NewEmail("", pData.Email),
-	}
-
-	p.AddTos(tos...)
-
-	p.SetDynamicTemplateData("email", pData.Email)
-	p.SetDynamicTemplateData("first_name", pData.FirstName)
-	p.SetDynamicTemplateData("verifyEmailUrl", link)
-	m.AddPersonalizations(p)
-	return mail.GetRequestBody(m)
-}
-
-func VerifyEmailRequest(w http.ResponseWriter, r *http.Request) {
-	var p VerifyEmailData
+func ContactRequest(w http.ResponseWriter, r *http.Request) {
+	var p PasswordResetData
 
 	// Set CORS headers for the preflight request
 	if r.Method == http.MethodOptions {

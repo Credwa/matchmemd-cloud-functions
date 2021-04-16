@@ -7,16 +7,25 @@ POST http://localhost:8765/password-reset-request HTTP/1.1
 content-type: application/json
 
 {
-  "email": "edwards.r.craffig@gmail.com",
+  "email": "craigroe7@gmail.com",
   "host": "https://staging.matchmemd.com"
 }
 
+###
+POST http://localhost:8765/verify-email-request HTTP/1.1
+content-type: application/json
+
+{
+  "email": "craigroe7@gmail.com",
+  "first_name": "Craig",
+  "host": "https://staging.matchmemd.com"
+}
 
 ###
 POST https://us-east1-matchmemd-staging-308907.cloudfunctions.net/password-reset-request HTTP/1.1
 content-type: application/json
 
 {
-  "email": "edwards.r.craig@gmail.com",
+  "email": "craigroe7@gmail.com",
   "host": "https://staging.matchmemd.com"
 }

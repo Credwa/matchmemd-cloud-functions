@@ -2,7 +2,7 @@ steps:
   - name: "gcr.io/cloud-builders/gcloud"
     waitFor: ["-"]
     entrypoint: "bash"
-    args: [ "-c", "gcloud functions deploy verify-email-request --runtime=go113 --trigger-http --region=us-east1 --memory=128MB --allow-unauthenticated --entry-point=VerifyEmailRequest --security-level=secure-always --set-env-vars=SENDGRID_API_KEY=$$SENDGRID_SECRET" ]
+    args: [ "-c", "gcloud functions deploy verify-email-request --runtime=go113 --trigger-http --region=us-east1 --memory=128MB --allow-unauthenticated --entry-point=VerifyEmailRequest --set-env-vars=SENDGRID_API_KEY=$$SENDGRID_SECRET" ]
     id: "deploying-matchmemd-verify-email"
     dir: "matchmemd-verify-email"
     secretEnv: ['SENDGRID_SECRET']

@@ -31,10 +31,6 @@ func (mr *malformedRequest) Error() string {
 	return mr.msg
 }
 
-func CORSEnabledFunction(w http.ResponseWriter, r *http.Request) {
-
-}
-
 func decodeJSONBody(w http.ResponseWriter, r *http.Request, dst interface{}) error {
 	r.Body = http.MaxBytesReader(w, r.Body, 1048576)
 	dec := json.NewDecoder(r.Body)
@@ -159,7 +155,6 @@ func PasswordResetRequest(w http.ResponseWriter, r *http.Request) {
 		}
 		return
 	}
-	log.Println(p)
 
 	request := sendgrid.GetRequest(os.Getenv("SENDGRID_API_KEY"), "/v3/mail/send", "https://api.sendgrid.com")
 	request.Method = "POST"
