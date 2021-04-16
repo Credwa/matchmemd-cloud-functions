@@ -7,6 +7,7 @@ import (
 
 	matchmemdpasswordreset "matchmemd-cloud-functions/matchmemd-password-reset"
 	matchmemdverifyemail "matchmemd-cloud-functions/matchmemd-verify-email"
+	matchmemdcontacts "matchmemd-cloud-functions/matchmemd-contacts"
 
 	"matchmemd-cloud-functions/common"
 
@@ -27,6 +28,11 @@ func main() {
 	if err := funcframework.RegisterHTTPFunctionContext(ctx, "/verify-email-request", matchmemdverifyemail.VerifyEmailRequest); err != nil {
 		log.Fatalf("funcframework.RegisterHTTPFunctionContext: %v\n", err)
 	}
+
+	if err := funcframework.RegisterHTTPFunctionContext(ctx, "/contact-request", matchmemdcontacts.ContactRequest); err != nil {
+		log.Fatalf("funcframework.RegisterHTTPFunctionContext: %v\n", err)
+	}
+
 	port := "8765"
 	if envPort := os.Getenv("PORT"); envPort != "" {
 		port = envPort

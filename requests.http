@@ -22,6 +22,17 @@ content-type: application/json
 }
 
 ###
+POST http://localhost:8765/contact-request HTTP/1.1
+content-type: application/json
+
+{
+  "email": "craigroe7@gmail.com",
+  "first_name": "Craig",
+  "last_name": "Edwards",
+  "postal_code": "30004"
+}
+
+###
 POST https://us-east1-matchmemd-staging-308907.cloudfunctions.net/password-reset-request HTTP/1.1
 content-type: application/json
 

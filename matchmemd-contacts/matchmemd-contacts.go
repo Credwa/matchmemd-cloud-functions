@@ -14,8 +14,15 @@ import (
 )
 
 type ContactData struct {
-	Email string `json:"email"`
-	Host  string `json:"host"`
+	Email      string `json:"email"`
+	FirstName  string `json:"first_name"`
+	LastName   string `json:"last_name"`
+	PostalCode string `json:"postal_code"`
+}
+
+type ContactPutRequest struct {
+	ListIds  []string      `json:"list_ids"`
+	Contacts []ContactData `json:"contacts"`
 }
 
 type malformedRequest struct {
@@ -76,31 +83,9 @@ func decodeJSONBody(w http.ResponseWriter, r *http.Request, dst interface{}) err
 	return nil
 }
 
-func dynamicTemplateEmail(pData *ContactData) []byte {
-	// m := mail.NewV3Mail()
-
-	// const noReplyEmailFrom = "no-reply@matchmemd.com"
-
-	// e := mail.NewEmail(noReplyEmailFrom, noReplyEmailFrom)
-	// m.SetFrom(e)
-
-	// m.SetTemplateID("d-af21306d33bd4af58ab3bb3ff7536902")
-	// p := mail.NewPersonalization()
-	// tos := []*mail.Email{
-	// 	mail.NewEmail("", pData.Email),
-	// }
-
-	// p.AddTos(tos...)
-
-	// p.SetDynamicTemplateData("email", pData.Email)
-	// p.SetDynamicTemplateData("passwordResetURL", link)
-	// m.AddPersonalizations(p)
-	// return mail.GetRequestBody(m)
-}
-
 func ContactRequest(w http.ResponseWriter, r *http.Request) {
 	var p ContactData
-
+	var req ContactPutRequest
 	// Set CORS headers for the preflight request
 	if r.Method == http.MethodOptions {
 		w.Header().Set("Access-Control-Allow-Origin", "*")
@@ -112,7 +97,7 @@ func ContactRequest(w http.ResponseWriter, r *http.Request) {
 	}
 	// Set CORS headers for the main request.
 	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Methods", "GET, POST")
+	w.Header().Set("Access-Control-Allow-Methods", "PATCH, POST")
 	w.Header().Set("Access-Control-Allow-Headers", "*")
 
 	err := decodeJSONBody(w, r, &p)
@@ -127,10 +112,15 @@ func ContactRequest(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	request := sendgrid.GetRequest(os.Getenv("SENDGRID_API_KEY"), "/v3/mail/send", "https://api.sendgrid.com")
-	request.Method = "POST"
-	var Body = dynamicTemplateEmail(&p)
-	request.Body = Body
+	request := sendgrid.GetRequest(os.Getenv("SENDGRID_API_KEY"), "/v3/marketing/contacts", "https://api.sendgrid.com")
+
+	req.ListIds = []string{"f1fa4b5b-e957-4fcb-8446-401f1670dd77"}
+	req.Contacts = []ContactData{p}
+	e, _ := json.Marshal(req)
+
+	request.Method = "PUT"
+	request.Body = e
+
 	response, err := sendgrid.API(request)
 	_ = response
 	if err != nil {
@@ -138,5 +128,8 @@ func ContactRequest(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Something went wrong", 400)
 	} else {
 		http.StatusText(http.StatusOK)
+		fmt.Println(response.StatusCode)
+		fmt.Println(response.Body)
+		fmt.Println(response.Headers)
 	}
 }
