@@ -36,15 +36,9 @@ func CORSEnabledFunction(w http.ResponseWriter, r *http.Request) {
 }
 
 func decodeJSONBody(w http.ResponseWriter, r *http.Request, dst interface{}) error {
-	if r.Header.Get("Content-Type") != "application/json" {
-		http.Error(w, "415 - Content-Type header is not application/json unsupported", http.StatusUnsupportedMediaType)
-		return nil
-	}
-
 	r.Body = http.MaxBytesReader(w, r.Body, 1048576)
 	dec := json.NewDecoder(r.Body)
 	dec.DisallowUnknownFields()
-
 	err := dec.Decode(&dst)
 	if err != nil {
 		var syntaxError *json.SyntaxError
@@ -165,18 +159,18 @@ func PasswordResetRequest(w http.ResponseWriter, r *http.Request) {
 		}
 		return
 	}
+	log.Println(p)
 
 	request := sendgrid.GetRequest(os.Getenv("SENDGRID_API_KEY"), "/v3/mail/send", "https://api.sendgrid.com")
 	request.Method = "POST"
 	var Body = dynamicTemplateEmail(&p)
 	request.Body = Body
 	response, err := sendgrid.API(request)
+	_ = response
 	if err != nil {
 		log.Println(err)
 		http.Error(w, "Something went wrong", 400)
 	} else {
-		fmt.Println(response.StatusCode)
-		fmt.Println(response.Body)
-		fmt.Println(response.Headers)
+		http.StatusText(http.StatusOK)
 	}
 }

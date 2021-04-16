@@ -155,6 +155,7 @@ func dynamicTemplateEmail(pData *PasswordResetData) []byte {
 func VerifyEmailRequest(w http.ResponseWriter, r *http.Request) {
 	var p PasswordResetData
 	CORSEnabledFunction(w, r)
+
 	err := decodeJSONBody(w, r, &p)
 	if err != nil {
 		var mr *malformedRequest
