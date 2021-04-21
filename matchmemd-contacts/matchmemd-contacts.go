@@ -16,10 +16,19 @@ import (
 )
 
 type ContactData struct {
-	Email      string `json:"email"`
-	FirstName  string `json:"first_name"`
-	LastName   string `json:"last_name"`
-	PostalCode string `json:"postal_code"`
+	Email               string `json:"email"`
+	FirstName           string `json:"first_name"`
+	LastName            string `json:"last_name"`
+	Gender              string `json:"gender"`
+	DateOfBirth         int    `json:"date_of_birth"`
+	MedicalStatus       string `json:"medical_status"`
+	Specialties         string `json:"specialties"`
+	HasClinicalInterest string `json:"has_clinical_interest"`
+	Country             string `json:"country"`
+	Clinicals           string `json:"clinicals"`
+	VisaRequired        string `json:"visa_required"`
+	School              string `json:"school"`
+	StartDate           string `json:"start_date"`
 }
 
 type ContactPutRequest struct {
