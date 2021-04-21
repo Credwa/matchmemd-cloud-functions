@@ -24,15 +24,15 @@ type ContactData struct {
 }
 
 type ContactCustomData struct {
-	Gender              string `json:"gender"`
-	DateOfBirth         int    `json:"date_of_birth"`
-	MedicalStatus       string `json:"medical_status"`
-	Specialties         string `json:"specialties"`
-	HasClinicalInterest string `json:"has_clinical_interest"`
-	Clinicals           string `json:"clinicals"`
-	VisaRequired        string `json:"visa_required"`
-	School              string `json:"school"`
-	StartDate           string `json:"start_date"`
+	Gender              string `json:"e13_T"`
+	DateOfBirth         int    `json:"e14_N"`
+	MedicalStatus       string `json:"e15_T"`
+	Specialties         string `json:"e9_T"`
+	HasClinicalInterest string `json:"e16_T"`
+	Clinicals           string `json:"e10_T"`
+	VisaRequired        string `json:"e12_T"`
+	School              string `json:"e5_T"`
+	StartDate           string `json:"e11_T"`
 }
 
 type ContactPutRequest struct {
