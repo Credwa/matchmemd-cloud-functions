@@ -1,6 +1,7 @@
 package matchmemdcontacts
 
 import (
+	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -10,6 +11,7 @@ import (
 	"os"
 	"strings"
 
+	firebase "firebase.google.com/go"
 	"github.com/sendgrid/sendgrid-go"
 )
 
@@ -100,6 +102,29 @@ func ContactRequest(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Methods", "PATCH, POST")
 	w.Header().Set("Access-Control-Allow-Headers", "*")
 
+	app, firebaseErr := firebase.NewApp(context.Background(), nil)
+	if firebaseErr != nil {
+		log.Fatalf("error initializing app: %v\n", firebaseErr)
+		http.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
+	}
+
+	idToken := r.Header.Get("Authorization")
+	splitToken := strings.Split(idToken, "Bearer ")
+	idToken = splitToken[1]
+
+	// Access auth service from the default app
+	client, authErr := app.Auth(context.Background())
+	if authErr != nil {
+		log.Fatalf("error getting Auth client: %v\n", authErr)
+		http.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
+	}
+
+	_, verifyErr := client.VerifyIDToken(context.Background(), idToken)
+	if verifyErr != nil {
+		log.Fatalf("error verifying ID token: %v\n", verifyErr)
+		http.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
+	}
+
 	err := decodeJSONBody(w, r, &p)
 	if err != nil {
 		var mr *malformedRequest
@@ -114,7 +139,7 @@ func ContactRequest(w http.ResponseWriter, r *http.Request) {
 
 	request := sendgrid.GetRequest(os.Getenv("SENDGRID_API_KEY"), "/v3/marketing/contacts", "https://api.sendgrid.com")
 
-	req.ListIds = []string{"f1fa4b5b-e957-4fcb-8446-401f1670dd77"}
+	req.ListIds = []string{"ad881e81-938c-4721-af1b-4944cfbdee73"}
 	req.Contacts = []ContactData{p}
 	e, _ := json.Marshal(req)
 
