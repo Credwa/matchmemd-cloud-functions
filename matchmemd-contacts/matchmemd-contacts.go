@@ -16,15 +16,19 @@ import (
 )
 
 type ContactData struct {
-	Email               string `json:"email"`
-	FirstName           string `json:"first_name"`
-	LastName            string `json:"last_name"`
+	Email        string            `json:"email"`
+	FirstName    string            `json:"first_name"`
+	LastName     string            `json:"last_name"`
+	Country      string            `json:"country"`
+	CustomFields ContactCustomData `json:"custom_fields"`
+}
+
+type ContactCustomData struct {
 	Gender              string `json:"gender"`
 	DateOfBirth         int    `json:"date_of_birth"`
 	MedicalStatus       string `json:"medical_status"`
 	Specialties         string `json:"specialties"`
 	HasClinicalInterest string `json:"has_clinical_interest"`
-	Country             string `json:"country"`
 	Clinicals           string `json:"clinicals"`
 	VisaRequired        string `json:"visa_required"`
 	School              string `json:"school"`
@@ -96,6 +100,7 @@ func decodeJSONBody(w http.ResponseWriter, r *http.Request, dst interface{}) err
 
 func ContactRequest(w http.ResponseWriter, r *http.Request) {
 	var p ContactData
+	var f ContactCustomData
 	var req ContactPutRequest
 	// Set CORS headers for the preflight request
 	if r.Method == http.MethodOptions {
