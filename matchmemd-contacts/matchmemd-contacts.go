@@ -100,7 +100,6 @@ func decodeJSONBody(w http.ResponseWriter, r *http.Request, dst interface{}) err
 
 func ContactRequest(w http.ResponseWriter, r *http.Request) {
 	var p ContactData
-	var f ContactCustomData
 	var req ContactPutRequest
 	// Set CORS headers for the preflight request
 	if r.Method == http.MethodOptions {
