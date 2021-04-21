@@ -109,6 +109,10 @@ func ContactRequest(w http.ResponseWriter, r *http.Request) {
 	}
 
 	idToken := r.Header.Get("Authorization")
+	if idToken == "" {
+		http.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
+		return
+	}
 	splitToken := strings.Split(idToken, "Bearer ")
 	idToken = splitToken[1]
 
