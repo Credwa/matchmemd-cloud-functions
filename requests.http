@@ -1,3 +1,5 @@
+################## localhost requests ##################
+
 GET http://localhost:8765 HTTP/1.1
 content-type: application/json
 
@@ -24,7 +26,7 @@ content-type: application/json
 ###
 PUT http://localhost:8765/contact-request HTTP/1.1
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjJjOGUyYjI5NmM2ZjMyODRlYzMwYjg4NjVkNzI5M2U2MjdmYTJiOGYiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vbWF0Y2htZW1kLXN0YWdpbmctMzA4OTA3IiwiYXVkIjoibWF0Y2htZW1kLXN0YWdpbmctMzA4OTA3IiwiYXV0aF90aW1lIjoxNjE5MDM3ODkwLCJ1c2VyX2lkIjoiUUVKRUlZc2E5NlgzYWg2YmRWRTNRWnFqTmJ4MiIsInN1YiI6IlFFSkVJWXNhOTZYM2FoNmJkVkUzUVpxak5ieDIiLCJpYXQiOjE2MTkwMzc4OTAsImV4cCI6MTYxOTA0MTQ5MCwiZW1haWwiOiJlZHdhcmRzLnIuY3JhaWdAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7ImVtYWlsIjpbImVkd2FyZHMuci5jcmFpZ0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.YEOnUNPmAMBfc-clMdYerO8O8gPgEm8Adfxo49y3Pe0nsBZVmhstFT7vpgWsJKr7q8CWCy5heD5q1yJbSlBwlVVMWDS5hQexgDdMx-rjWxnjYiELakWUq1yirRTCvbLbeqNYGb_CptoxxkO8EiF4oIYMbMA6lQ65SQzRjLta63QUjwU60rlQOEoMMr_y5w74r0dynR-9TuBYbc6jtuVktT_RrKl67eexEpgqYJEWlF9Pxxf53v8Kdl6a6LZAIIhAVgDXTYvbvWmkuwCwvJ6Amiqzf_3VzmRGt-qrvCqzb2pa1LRnyzbSQvqvqULi222xDGzcolMtPmGeiee0uMPQ8g
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjJjOGUyYjI5NmM2ZjMyODRlYzMwYjg4NjVkNzI5M2U2MjdmYTJiOGYiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vbWF0Y2htZW1kLXN0YWdpbmctMzA4OTA3IiwiYXVkIjoibWF0Y2htZW1kLXN0YWdpbmctMzA4OTA3IiwiYXV0aF90aW1lIjoxNjE5MDQwODI0LCJ1c2VyX2lkIjoidWJxOUdRZzZnblp5SE9oRllza1BBVVlPNzNBMiIsInN1YiI6InVicTlHUWc2Z25aeUhPaEZZc2tQQVVZTzczQTIiLCJpYXQiOjE2MTkwNDA4MjQsImV4cCI6MTYxOTA0NDQyNCwiZW1haWwiOiJjcmFpZ3JvZTdAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7ImVtYWlsIjpbImNyYWlncm9lN0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.Zs3G4gspI0Pb-f9kpfhLqoNrjNFhpsNgVHtyvLhC9IV-xMiecRVWfcblYey9z85gSBDWWW3YysFNWRslwFPapf9WMg49n7l7bofOW5QMhDnMb69WEOdd2Cy862Tk8_JqPu2TehHJVz9erZjWaIqQDZrWmCQ1NQ0Y7IuhUYkAv9OAMcW13UJV_l6hzMXowkNkX0YZ5f6uu2196tNEBlKJU4INyOJjIv6QhOPDeHqTcRV2_LEkO8zLbjjy5ZAPbjoWLcDhKpFX5ZGmMNv0X9qjVCyFfGwSkVrq2nGXUo5vfq2ggqcZSD_mOTHFDtNzGVyqHsl2Ziyn3i81kIAYNegi5Q
 
 # Gender              string `json:"e13_T"`
 # DateOfBirth         int    `json:"e14_N"`
@@ -41,13 +43,47 @@ Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjJjOGUyYjI5NmM2ZjMyODRlYzMwYj
   "last_name": "Edwards",
   "country": "Dominica",
   "custom_fields": {
-    "e10_T": "core, test",
+    "e10_T": "core, tesfggt",
     "e16_T": "true",
-    "e14_N": 12345,
+    "e14_N": 123532545,
     "e12_T": "true",
-    "e5_T": "university of whatever"
+    "e5_T": "university ofsdfsf whatever",
     "e13_T": "male",
-    "e9_T": "med, mreri, test",
+    "e9_T": "med, mdfsdfsreri, test",
+    "e15_T": "graduate",
+    "e11_T": "medium"
+  }
+}
+
+################## Staging requests ##################
+
+###
+PUT https://us-east1-matchmemd-staging-308907.cloudfunctions.net/contact-request HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjJjOGUyYjI5NmM2ZjMyODRlYzMwYjg4NjVkNzI5M2U2MjdmYTJiOGYiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vbWF0Y2htZW1kLXN0YWdpbmctMzA4OTA3IiwiYXVkIjoibWF0Y2htZW1kLXN0YWdpbmctMzA4OTA3IiwiYXV0aF90aW1lIjoxNjE5MDQwODI0LCJ1c2VyX2lkIjoidWJxOUdRZzZnblp5SE9oRllza1BBVVlPNzNBMiIsInN1YiI6InVicTlHUWc2Z25aeUhPaEZZc2tQQVVZTzczQTIiLCJpYXQiOjE2MTkwNDA4MjQsImV4cCI6MTYxOTA0NDQyNCwiZW1haWwiOiJjcmFpZ3JvZTdAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7ImVtYWlsIjpbImNyYWlncm9lN0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.Zs3G4gspI0Pb-f9kpfhLqoNrjNFhpsNgVHtyvLhC9IV-xMiecRVWfcblYey9z85gSBDWWW3YysFNWRslwFPapf9WMg49n7l7bofOW5QMhDnMb69WEOdd2Cy862Tk8_JqPu2TehHJVz9erZjWaIqQDZrWmCQ1NQ0Y7IuhUYkAv9OAMcW13UJV_l6hzMXowkNkX0YZ5f6uu2196tNEBlKJU4INyOJjIv6QhOPDeHqTcRV2_LEkO8zLbjjy5ZAPbjoWLcDhKpFX5ZGmMNv0X9qjVCyFfGwSkVrq2nGXUo5vfq2ggqcZSD_mOTHFDtNzGVyqHsl2Ziyn3i81kIAYNegi5Q
+
+# Gender              string `json:"e13_T"`
+# DateOfBirth         int    `json:"e14_N"`
+# MedicalStatus       string `json:"e15_T"`
+# Specialties         string `json:"e9_T"`
+# HasClinicalInterest string `json:"e16_T"`
+# Clinicals           string `json:"e10_T"`
+# VisaRequired        string `json:"e12_T"`
+# School              string `json:"e5_T"`
+# StartDate           string `json:"e11_T"`
+{
+  "email": "test123@gmail.com",
+  "first_name": "Craig",
+  "last_name": "Edwards",
+  "country": "Dominica",
+  "custom_fields": {
+    "e10_T": "core, tesfggt",
+    "e16_T": "true",
+    "e14_N": 123532545,
+    "e12_T": "true",
+    "e5_T": "university ofsdfsf whatever",
+    "e13_T": "male",
+    "e9_T": "med, mdfsdfsreri, test",
     "e15_T": "graduate",
     "e11_T": "medium"
   }
