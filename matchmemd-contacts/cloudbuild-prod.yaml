@@ -1,0 +1,13 @@
+steps:
+  - name: "gcr.io/cloud-builders/gcloud"
+    waitFor: ["-"]
+    entrypoint: "bash"
+    args: [ "-c", "gcloud functions deploy contact-request --runtime=go113 --trigger-http --region=us-east1 --memory=256MB --allow-unauthenticated --entry-point=ContactRequest --set-env-vars=SENDGRID_API_KEY=$$SENDGRID_SECRET" ]
+    id: "deploying-matchmemd-contacts"
+    dir: "matchmemd-contacts"
+    secretEnv: ['SENDGRID_SECRET']
+availableSecrets:
+  secretManager:
+  - versionName: projects/15550425405/secrets/SENDGRID_API_KEY/versions/1
+    env: SENDGRID_SECRET
+
