@@ -107,6 +107,8 @@ func ContactRequest(w http.ResponseWriter, r *http.Request) {
 		allowedHost = r.Host
 	}
 	log.Println(r.Host)
+	log.Println(r.Referer())
+	log.Println(r.URL)
 	log.Println(allowedHost)
 	// Set CORS headers for the preflight request
 	if r.Method == http.MethodOptions {
