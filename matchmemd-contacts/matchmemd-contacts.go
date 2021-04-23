@@ -102,13 +102,10 @@ func ContactRequest(w http.ResponseWriter, r *http.Request) {
 	var p ContactData
 	var req ContactPutRequest
 
-	var allowedHost string = "app.matchmemd.com"
-	if r.Host == "app.matchmemd.com" || r.Host == "staging.matchmemd.com" {
-		allowedHost = r.Host
+	var allowedHost string = "https://app.matchmemd.com"
+	if r.Header.Get("Origin") == "https://app.matchmemd.com" || r.Header.Get("Origin") == "https://staging.matchmemd.com" {
+		allowedHost = r.Header.Get("Origin")
 	}
-	log.Println(r.Host)
-	log.Println(r.Referer())
-	log.Println(r.URL)
 	log.Println(r.Header.Get("Origin"))
 	log.Println(allowedHost)
 	// Set CORS headers for the preflight request

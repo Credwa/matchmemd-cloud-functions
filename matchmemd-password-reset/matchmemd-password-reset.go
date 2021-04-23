@@ -130,12 +130,10 @@ func dynamicTemplateEmail(pData *PasswordResetData) []byte {
 func PasswordResetRequest(w http.ResponseWriter, r *http.Request) {
 	var p PasswordResetData
 
-	var allowedHost string = "app.matchmemd.com"
-	if r.Host == "app.matchmemd.com" || r.Host == "staging.matchmemd.com" {
-		allowedHost = r.Host
+	var allowedHost string = "https://app.matchmemd.com"
+	if r.Header.Get("Origin") == "https://app.matchmemd.com" || r.Header.Get("Origin") == "https://staging.matchmemd.com" {
+		allowedHost = r.Header.Get("Origin")
 	}
-	log.Println(r.Host)
-	log.Println(allowedHost)
 	// Set CORS headers for the preflight request
 	if r.Method == http.MethodOptions {
 		w.Header().Set("Access-Control-Allow-Origin", allowedHost)
