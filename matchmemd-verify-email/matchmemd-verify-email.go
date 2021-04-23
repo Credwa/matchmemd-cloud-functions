@@ -135,6 +135,8 @@ func VerifyEmailRequest(w http.ResponseWriter, r *http.Request) {
 	if r.Host == "https://app.matchmemd.com" || r.Host == "https://staging.matchmemd.com" {
 		allowedHost = r.Host
 	}
+	log.Println(r.Host)
+	log.Println(allowedHost)
 	// Set CORS headers for the preflight request
 	if r.Method == http.MethodOptions {
 		w.Header().Set("Access-Control-Allow-Origin", allowedHost)
