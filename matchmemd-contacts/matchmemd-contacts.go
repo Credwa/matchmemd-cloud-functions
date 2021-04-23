@@ -101,9 +101,14 @@ func decodeJSONBody(w http.ResponseWriter, r *http.Request, dst interface{}) err
 func ContactRequest(w http.ResponseWriter, r *http.Request) {
 	var p ContactData
 	var req ContactPutRequest
+
+	var allowedHost string = "https://app.matchmemd.com"
+	if r.Host == "https://app.matchmemd.com" || r.Host == "https://staging.matchmemd.com" {
+		allowedHost = r.Host
+	}
 	// Set CORS headers for the preflight request
 	if r.Method == http.MethodOptions {
-		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Origin", allowedHost)
 		w.Header().Set("Access-Control-Allow-Methods", "PUT")
 		w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
 		w.Header().Set("Access-Control-Max-Age", "3600")
@@ -111,9 +116,9 @@ func ContactRequest(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// Set CORS headers for the main request.
-	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Origin", allowedHost)
 	w.Header().Set("Access-Control-Allow-Methods", "PUT")
-	w.Header().Set("Access-Control-Allow-Headers", "*")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
 
 	app, firebaseErr := firebase.NewApp(context.Background(), nil)
 	if firebaseErr != nil {
