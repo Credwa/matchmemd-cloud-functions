@@ -131,8 +131,8 @@ func dynamicTemplateEmail(pData *VerifyEmailData) []byte {
 
 func VerifyEmailRequest(w http.ResponseWriter, r *http.Request) {
 	var p VerifyEmailData
-	var allowedHost string = "https://app.matchmemd.com"
-	if r.Host == "https://app.matchmemd.com" || r.Host == "https://staging.matchmemd.com" {
+	var allowedHost string = "app.matchmemd.com"
+	if r.Host == "app.matchmemd.com" || r.Host == "staging.matchmemd.com" {
 		allowedHost = r.Host
 	}
 	log.Println(r.Host)
